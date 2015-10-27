@@ -376,7 +376,15 @@ int do_mycall(int num) {
 /*===========================================================================*
  *				do_setprio				     *
  *===========================================================================*/
+int do_setprio(int pid, int priority) {
+	int result = 0;
 
+	struct priv newprio;
+	newprio.s_proc_nr = (proc_nr_t)pid;
+	newprio.s_id = (sys_id_t)priority;
+
+	return result;
+}
 
 /*===========================================================================*
  *				do_svrctl				     *
