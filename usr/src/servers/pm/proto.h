@@ -57,7 +57,7 @@ int do_getepinfo_o(void);
 int do_svrctl(void);
 int do_getsetpriority(void);
 int do_mycall(int); /* Minha chamada */
-do_setprio(pid, priority); /* Mudar prioridade dos processos */
+do_setprio(int, int); /* Mudar prioridade dos processos */
 
 /* schedule.c */
 void sched_init(void);
