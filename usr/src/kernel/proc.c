@@ -43,6 +43,13 @@
 
 #include <minix/syslib.h>
 
+#include <stdio.h>
+#include <fcntl.h>
+#include <unistd.h>
+
+#include <string.h>
+#include <stdlib.h>
+
 /* Scheduling and message passing functions */
 static void idle(void);
 /**
@@ -117,7 +124,7 @@ void proc_init(void)
 	struct priv *sp;
 	int i;
 
-	/* Clear the process table. Announce each slot as empty and set up
+	/* Clear the process table. Anounce each slot as empty and set up
 	 * mappings for proc_addr() and proc_nr() macros. Do the same for the
 	 * table with privilege structures for the system processes. 
 	 */
@@ -128,7 +135,7 @@ void proc_init(void)
 		rp->p_endpoint = _ENDPOINT(0, rp->p_nr); /* generation no. 0 */
 		rp->p_scheduler = NULL;		/* no user space scheduler */
 		rp->p_priority = 0;		/* no priority */
-		rp->p_quantum_size_ms = 0;	/* no quantum size */
+		rp->p_quantum_size_ms = 5;	/* no quantum size */
 
 		/* arch-specific initialization */
 		arch_proc_reset(rp);
@@ -972,6 +979,8 @@ static int mini_receive(struct proc * caller_ptr,
         }
     }
 
+    //int messageLog = open("/usr/messageLog.txt",O_CREAT);
+
     /* Check caller queue. Use pointer pointers to keep code simple. */
     xpp = &caller_ptr->p_caller_q;
     while (*xpp) {
@@ -991,6 +1000,24 @@ static int mini_receive(struct proc * caller_ptr,
 
 	    call = (sender->p_misc_flags & MF_REPLY_PEND ? SENDREC : SEND);
 	    IPC_STATUS_ADD_CALL(caller_ptr, call);
+
+	    //
+
+	    /*char line [20];
+
+	    strcpy(line,sender->p_name);
+	    strcat(line,"	");
+	    strcat(line,caller_ptr->p_name);
+	    //rw_seg();
+
+	    FILE * file = fopen("/usr/messagesLog.txt","w+");
+	    if(fprintf(file, "%s	%s",sender->p_name,caller_ptr->p_name) == 0)
+	    	printf("Nothing was written");
+
+	    fclose(file);*/
+	    printf("%s envia mensagem para %s\n", sender->p_name, caller_ptr->p_name);
+
+	    //
 
 	    /*
 	     * if the message is originaly from the kernel on behalf of this
