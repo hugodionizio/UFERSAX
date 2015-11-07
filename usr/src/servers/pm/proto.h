@@ -4,6 +4,7 @@ struct mproc;
 struct stat;
 struct mem_map;
 struct memory;
+struct proc;
 
 #include <timers.h>
 
@@ -56,8 +57,7 @@ int do_getepinfo(void);
 int do_getepinfo_o(void);
 int do_svrctl(void);
 int do_getsetpriority(void);
-int do_mycall(int); /* Minha chamada */
-int do_setprio(int, int); /* Mudar prioridade dos processos */
+int do_setprio(void);
 
 /* schedule.c */
 void sched_init(void);
