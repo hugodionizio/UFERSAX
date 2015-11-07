@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
-#include "setpriolib.h"
+#include <setpriolib.h>
 
 int main(void) {
 	int i;
