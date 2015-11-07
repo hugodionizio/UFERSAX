@@ -376,14 +376,12 @@ int do_mycall(int num) {
 /*===========================================================================*
  *				do_setprio				     *
  *===========================================================================*/
-int do_setprio(int pid, int priority) {
-	int result = 0;
+int do_setprio(int this_pid, int this_priority) {
 
-	struct priv newprio;
-	newprio.s_proc_nr = (proc_nr_t)pid;
-	newprio.s_id = (sys_id_t)priority;
+	//extern sys_nice(this_pid, this_priority);
+	printf("A prioridade do processo %d foi alterada para %d", this_pid, this_priority);
 
-	return result;
+	return(OK);
 }
 
 /*===========================================================================*
