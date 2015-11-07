@@ -35,7 +35,7 @@
 #define SETGROUPS	  32
 #define ACCESS		  33 
 #define GETGROUPS	  34
-#define MYCALL		35
+#define SETQUANTUM	  35
 #define SYNC		  36 
 #define KILL		  37
 #define RENAME		  38
@@ -44,7 +44,7 @@
 #define DUP		  41 
 #define PIPE		  42 
 #define TIMES		  43
-#define SETPRIO		  44 /* Mudar prioridade dos processos */
+#define DEC			  44
 #define SYMLINK		  45
 #define SETGID		  46
 #define GETGID		  47
@@ -56,6 +56,7 @@
 #define LSTAT		  53
 #define IOCTL		  54
 #define FCNTL		  55
+#define SETPRIO		  56
 #define FS_READY	  57
 #define EXEC		  59
 #define UMASK		  60 
