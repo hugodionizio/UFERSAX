@@ -30,6 +30,8 @@
 #include "param.h"
 #include "kernel/proc.h"
 
+#include "kernel/proto.h"
+
 struct utsname uts_val = {
   "Minix",		/* system name */
   "noname",		/* node/network name */
@@ -365,25 +367,6 @@ int do_getsetpriority()
 	return(OK);
 }
 
-/*=================================================*
-*				do_mycall 					*
-*================================================*/
-int do_mycall(int num) {
-	printf("Voc%c digitou o n%cmero \"%d\"\n", 136, 163, num);
-	return(OK);
-}
-
-/*===========================================================================*
- *				do_setprio				     *
- *===========================================================================*/
-int do_setprio(int this_pid, int this_priority) {
-
-	//extern sys_nice(this_pid, this_priority);
-	printf("A prioridade do processo %d foi alterada para %d", this_pid, this_priority);
-
-	return(OK);
-}
-
 /*===========================================================================*
  *				do_svrctl				     *
  *===========================================================================*/
@@ -513,4 +496,21 @@ char *brk_addr;
 	}
 	_brksize = brk_addr;
 	return 0;
+}
+
+
+/*===========================================================================*
+ *				do_setprio				     *
+ *===========================================================================*/
+int do_setprio() {
+
+	int process = m_in.m1_i1;
+	int priority = m_in.m1_i2;
+
+	extern int sys_nice( int process, int priority);
+
+	//Esta mensagem aparecerá na tela principal do Minix. 
+	printf("A prioridade do processo %d foi alterada para %d", process, priority);
+
+	return(OK);
 }
